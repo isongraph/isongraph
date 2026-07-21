@@ -124,23 +124,7 @@ ISONGraph has been comprehensively tested with two benchmark suites:
 
 ## Installation
 
-*Python is live on [PyPI](https://pypi.org/project/ison-graph/) and the JavaScript/TypeScript packages are live on [npm](https://www.npmjs.com/package/ison-graph-ts). The Rust crate is being published to crates.io — until then, use the path dependency below.*
-
-### From Source
-
-```bash
-git clone https://github.com/isongraph/isongraph.git
-cd isongraph
-
-pip install ./ison-graph        # Python
-npm install ./ison-graph-ts     # TypeScript / JavaScript
-```
-
-```toml
-# Rust: use a path dependency until the crate is on crates.io
-[dependencies]
-ison-graph = { path = "../isongraph/ison-graph-rs" }
-```
+All packages are live: [PyPI](https://pypi.org/project/ison-graph/) · [npm (ison-graph-ts)](https://www.npmjs.com/package/ison-graph-ts) · [npm (ison-graph-js)](https://www.npmjs.com/package/ison-graph-js) · [crates.io](https://crates.io/crates/ison-graph)
 
 ### Python
 
