@@ -1,0 +1,37 @@
+name: Publish npm packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Which package to publish
+        type: choice
+        options: [ison-graph-js, ison-graph-ts, both]
+        default: both
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [ison-graph-js, ison-graph-ts]
+    steps:
+      - name: Skip if not selected
+        if: inputs.package != 'both' && inputs.package != matrix.package
+        run: echo "skipping ${{ matrix.package }}"
+      - uses: actions/checkout@v4
+        if: inputs.package == 'both' || inputs.package == matrix.package
+      - uses: actions/setup-node@v4
+        if: inputs.package == 'both' || inputs.package == matrix.package
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+      - name: Test and publish
+        if: inputs.package == 'both' || inputs.package == matrix.package
+        working-directory: ${{ matrix.package }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm ci
+          npm test
+          npm publish --access public
