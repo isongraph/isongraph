@@ -903,6 +903,38 @@ schema = GraphSchema("social") \
     .no_orphans()     # All nodes must have at least one edge
 ```
 
+## Visualization
+
+`ison_graph.viz` turns a graph into a picture in three stages — data, layout,
+rendering — with zero extra dependencies:
+
+```python
+from ison_graph import ISONGraph
+from ison_graph.viz import compute_layout, render_svg, render_html
+
+graph = ISONGraph.load("social.ison")
+
+# Stage 2: deterministic seeded force-directed layout -> {(type, id): (x, y)}
+layout = compute_layout(graph, width=900, height=600, seed=42)
+
+# Stage 3: render the same coordinates to SVG or interactive HTML
+svg = render_svg(graph, layout, title="My graph")          # standalone image
+html = render_html(graph, layout)                          # tooltips, pan/zoom, dark mode
+```
+
+The same seed always produces the same coordinates, so a server-rendered SVG
+and a client-rendered page stay pixel-identical. Nodes are colored by type
+(colorblind-safe palette, max 8 types before folding to a neutral), sized by
+degree, and labeled from the `name` property (or `label_property=` of your
+choice).
+
+Command line:
+
+```bash
+python -m ison_graph.viz social.ison -o graph.svg
+python -m ison_graph.viz social.ison -o graph.html --edge-labels --title "Social"
+```
+
 ## Integration with ISON Ecosystem
 
 ```
@@ -993,6 +1025,6 @@ MIT License - see [LICENSE](https://github.com/isongraph/isongraph/blob/main/LIC
 ## Author
 
 **Mahesh Vaikri**
-- Website: [www.ison.dev](https://www.ison.dev)
-- Documentation: [www.getison.com](https://www.getison.com)
+- Website: [graph.ison.dev](https://graph.ison.dev)
+- Documentation: [graph.ison.dev/docs.html](https://graph.ison.dev/docs.html)
 - GitHub: [@maheshvaikri-code](https://github.com/maheshvaikri-code)

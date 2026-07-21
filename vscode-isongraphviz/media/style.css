@@ -1,0 +1,106 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--vscode-font-family, system-ui, sans-serif);
+    color: var(--vscode-foreground);
+    background: var(--vscode-editor-background);
+}
+
+#toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--vscode-panel-border, rgba(128, 128, 128, .25));
+    font-size: 12px;
+}
+
+#toolbar button {
+    background: var(--vscode-button-secondaryBackground, rgba(128, 128, 128, .18));
+    color: var(--vscode-button-secondaryForeground, inherit);
+    border: none;
+    border-radius: 4px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#toolbar button:hover {
+    background: var(--vscode-button-secondaryHoverBackground, rgba(128, 128, 128, .3));
+}
+
+#animate-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#status {
+    margin-left: auto;
+    opacity: .7;
+    font-variant-numeric: tabular-nums;
+}
+
+#stage {
+    position: absolute;
+    inset: 33px 0 0 0;
+}
+
+#stage svg {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    display: block;
+}
+
+#stage svg:active {
+    cursor: grabbing;
+}
+
+.edge {
+    stroke: var(--vscode-editorIndentGuide-background, #88888855);
+    stroke-width: 2;
+}
+
+.edge-arrow {
+    fill: var(--vscode-editorIndentGuide-background, #88888855);
+}
+
+.node {
+    stroke: var(--vscode-editor-background);
+    stroke-width: 2;
+    cursor: pointer;
+}
+
+.node-label {
+    fill: var(--vscode-descriptionForeground, currentColor);
+    font-size: 12px;
+    font-family: var(--vscode-font-family, system-ui, sans-serif);
+    pointer-events: none;
+    user-select: none;
+}
+
+.legend-label {
+    fill: var(--vscode-foreground);
+    font-size: 12px;
+    font-family: var(--vscode-font-family, system-ui, sans-serif);
+}
+
+#tip {
+    position: fixed;
+    display: none;
+    pointer-events: none;
+    background: var(--vscode-editorHoverWidget-background, #252526);
+    color: var(--vscode-editorHoverWidget-foreground, #ccc);
+    border: 1px solid var(--vscode-editorHoverWidget-border, #454545);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.55;
+    max-width: 280px;
+    z-index: 10;
+}

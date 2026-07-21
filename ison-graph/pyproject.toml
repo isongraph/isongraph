@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ison-graph"
-version = "1.0.0"
+version = "1.1.0"
 description = "ISONGraph - A token-efficient graph store format built on ISON"
 readme = "README.md"
 license = {text = "MIT"}
@@ -57,8 +57,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://www.ison.dev"
-Documentation = "https://www.ison.dev"
+Homepage = "https://graph.ison.dev"
+Documentation = "https://graph.ison.dev/docs.html"
 Repository = "https://github.com/isongraph/isongraph"
 Issues = "https://github.com/isongraph/isongraph/issues"
 

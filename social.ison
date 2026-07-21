@@ -12,8 +12,8 @@ startupx	StartupX	AI
 
 nodes.project
 id	name	status
-alpha	Project Alpha	active
-beta	Project Beta	planning
+alpha	"Project Alpha"	active
+beta	"Project Beta"	planning
 
 edges.KNOWS
 source	target	since

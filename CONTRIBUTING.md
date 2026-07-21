@@ -19,6 +19,7 @@ cd isongraph
 | `ison-graph-rs/` (Rust, crate `ison-graph`) | `cargo build` then `cargo test` |
 | `ison-graph-cpp/` (C++, header-only) | `cmake -B build && cmake --build build` then `ctest --test-dir build` |
 | `vscode-isongraph/` (VS Code extension) | `npm install` then `npm run compile` |
+| `vscode-isongraphviz/` (VS Code extension) | `npm install` then `npm run compile` |
 
 Benchmarks live in `benchmark/`; they call the DeepSeek API — set the `DEEPSEEK_API_KEY` environment variable before running.
 

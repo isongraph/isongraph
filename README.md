@@ -98,6 +98,7 @@ ISONGraph has been comprehensively tested with two benchmark suites:
 - **Fluent Query API** - Chainable traversal interface
 - **Pattern Queries** - Cypher-like query patterns
 - **ISONQL** - Declarative SQL-like query language for graphs
+- **Visualization** - Deterministic force layout + SVG/HTML rendering (`ison_graph.viz`, Python)
 
 ### Schema Validation (ISONGraphantic)
 - **Type Validators** - String, Int, Float, Bool, Ref
@@ -123,7 +124,7 @@ ISONGraph has been comprehensively tested with two benchmark suites:
 
 ## Installation
 
-*Packages are being published to PyPI / npm / crates.io — until then, install from source as shown below.*
+*Python is live on [PyPI](https://pypi.org/project/ison-graph/). The npm and crates.io packages are being published — until then, install those from source as shown below.*
 
 ### From Source
 
@@ -343,7 +344,8 @@ isongraph/
 ├── ison-graph-ts/           # TypeScript implementation
 ├── ison-graph-rs/           # Rust implementation (crate name: ison-graph)
 ├── ison-graph-cpp/          # C++ implementation (header-only)
-├── vscode-isongraph/        # VS Code extension: graph visualizer
+├── vscode-isongraph/        # VS Code extension: graph visualizer (d3-based)
+├── vscode-isongraphviz/     # VS Code extension: deterministic viz (zero-dependency)
 ├── benchmark/               # Performance benchmarks
 └── assets/                  # Logos and images
 ```
@@ -835,7 +837,7 @@ cargo test
 - [ ] Distributed graph support
 - [ ] GraphQL interface
 - [ ] Neo4j import/export
-- [x] Visualization tools (VS Code extension in [vscode-isongraph/](vscode-isongraph/))
+- [x] Visualization tools (`ison_graph.viz` + VS Code extensions in [vscode-isongraph/](vscode-isongraph/) and [vscode-isongraphviz/](vscode-isongraphviz/))
 - [ ] WASM builds for browser
 
 ---
@@ -848,7 +850,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Links
 
-- **Documentation**: [https://www.ison.dev/graph](https://www.ison.dev/graph)
+- **Website**: [graph.ison.dev](https://graph.ison.dev)
+- **Documentation**: [graph.ison.dev/docs.html](https://graph.ison.dev/docs.html)
 - **ISON Format**: [https://www.ison.dev](https://www.ison.dev)
 - **GitHub**: [https://github.com/isongraph/isongraph](https://github.com/isongraph/isongraph)
 

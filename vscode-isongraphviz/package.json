@@ -1,0 +1,77 @@
+{
+  "name": "isongraphviz",
+  "displayName": "ISONGraph Viz",
+  "description": "Deterministic graph visualization for .ison property graphs - seeded force layout, draggable nodes, zero runtime dependencies",
+  "version": "0.1.0",
+  "publisher": "isongraph",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isongraph/isongraph.git",
+    "directory": "vscode-isongraphviz"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "ison",
+    "isongraph",
+    "graph",
+    "visualization",
+    "property graph"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "isongraphviz.show",
+        "title": "Visualize Graph",
+        "category": "ISONGraph Viz",
+        "icon": "$(type-hierarchy)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "isongraphviz.show",
+          "when": "resourceExtname == .ison || resourceExtname == .isong",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "isongraphviz.show",
+          "when": "resourceExtname == .ison || resourceExtname == .isong"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ISONGraph Viz",
+      "properties": {
+        "isongraphviz.seed": {
+          "type": "number",
+          "default": 42,
+          "description": "Layout seed. The same graph and seed always produce the same geometry."
+        },
+        "isongraphviz.iterations": {
+          "type": "number",
+          "default": 170,
+          "description": "Force-simulation iterations for the initial deterministic layout."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.5.0"
+  }
+}

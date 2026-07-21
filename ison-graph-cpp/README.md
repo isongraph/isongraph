@@ -870,6 +870,6 @@ MIT License - see [LICENSE](../LICENSE) for details.
 ## Author
 
 **Mahesh Vaikri**
-- Website: [www.ison.dev](https://www.ison.dev)
-- Documentation: [www.getison.com](https://www.getison.com)
+- Website: [graph.ison.dev](https://graph.ison.dev)
+- Documentation: [graph.ison.dev/docs.html](https://graph.ison.dev/docs.html)
 - GitHub: [@maheshvaikri-code](https://github.com/maheshvaikri-code)
