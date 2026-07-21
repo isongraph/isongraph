@@ -193,3 +193,8 @@ nul
 # Local tooling (published in separate repos)
 # ============================================
 tools/
+
+# ============================================
+# Website (deployed separately)
+# ============================================
+website-graph/
