@@ -664,6 +664,30 @@ const ison = graph.toIson();
 console.log('ISON format:\n', ison);
 ```
 
+## Visualization (new in 1.1.0)
+
+Deterministic layout and dependency-free rendering, mirroring the Python
+`ison_graph.viz` module - the same graph and seed produce bit-identical
+coordinates in both languages (covered by a parity test).
+
+```typescript
+import { ISONGraph, viz } from 'ison-graph-ts';
+
+const graph = new ISONGraph('social');
+// ... add nodes and edges ...
+
+// Stage 2: seeded force-directed layout -> Map<"type id", [x, y]>
+const layout = viz.computeLayout(graph, { width: 900, height: 600, seed: 42 });
+
+// Stage 3: render the same coordinates
+const svg = viz.renderSvg(graph, { layout, title: 'My graph' });  // standalone image
+const html = viz.renderHtml(graph, { layout });                    // tooltips, pan/zoom, dark mode
+```
+
+Nodes are colored by type (colorblind-safe palette, 8 slots assigned in
+sorted order), sized by degree, and labeled from the `name` property (or
+`labelProperty` of your choice).
+
 ## License
 
 MIT License - see [LICENSE](../LICENSE) for details.

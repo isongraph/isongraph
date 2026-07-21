@@ -1,6 +1,6 @@
 {
   "name": "ison-graph-ts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ISONGraph - Token-efficient property graph store with ISON persistence for TypeScript",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

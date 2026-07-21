@@ -1,6 +1,6 @@
 {
   "name": "ison-graph-js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ISONGraph - Token-efficient property graph store with ISON persistence for JavaScript",
   "main": "src/index.js",
   "type": "module",

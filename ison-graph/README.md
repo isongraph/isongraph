@@ -928,6 +928,10 @@ and a client-rendered page stay pixel-identical. Nodes are colored by type
 degree, and labeled from the `name` property (or `label_property=` of your
 choice).
 
+The same API ships in the npm packages (`import { viz } from 'ison-graph-ts'`
+or `'ison-graph-js'`) with bit-identical layout geometry, verified by
+cross-language parity tests.
+
 Command line:
 
 ```bash

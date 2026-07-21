@@ -1254,3 +1254,6 @@ export * from './query.js';
 
 // Schema Validation Module
 export * from './schema.js';
+
+// Visualization Module (deterministic layout + SVG/HTML rendering)
+export * as viz from './viz.js';

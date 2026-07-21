@@ -98,7 +98,7 @@ ISONGraph has been comprehensively tested with two benchmark suites:
 - **Fluent Query API** - Chainable traversal interface
 - **Pattern Queries** - Cypher-like query patterns
 - **ISONQL** - Declarative SQL-like query language for graphs
-- **Visualization** - Deterministic force layout + SVG/HTML rendering (`ison_graph.viz`, Python)
+- **Visualization** - Deterministic force layout + SVG/HTML rendering (Python, JavaScript, TypeScript - bit-identical geometry across languages)
 
 ### Schema Validation (ISONGraphantic)
 - **Type Validators** - String, Int, Float, Bool, Ref

@@ -1489,3 +1489,6 @@ export * from './query';
 
 // Schema Validation Module
 export * from './schema';
+
+// Visualization Module (deterministic layout + SVG/HTML rendering)
+export * as viz from './viz';
