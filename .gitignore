@@ -1,0 +1,195 @@
+# ============================================
+# ISONGraph .gitignore
+# ============================================
+
+# ============================================
+# Build Directories
+# ============================================
+build/
+cmake-build-*/
+out/
+dist/
+target/
+Release/
+Debug/
+x64/
+x86/
+
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+venv/
+.venv/
+ENV/
+env/
+
+# ============================================
+# Node.js / TypeScript
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn
+*.tsbuildinfo
+.eslintcache
+
+# ============================================
+# Rust
+# ============================================
+**/*.rs.bk
+
+# ============================================
+# C / C++
+# ============================================
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dll
+*.dylib
+*.so
+*.a
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.idb
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sdf
+*.opensdf
+*.aps
+*.ncb
+*.opendb
+*.ipch
+*.tlog/
+compile_commands.json
+
+# ============================================
+# IDEs and Editors
+# ============================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+.spyderproject
+.spyproject
+.ropeproject
+
+# ============================================
+# OS Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ============================================
+# Logs and Databases
+# ============================================
+*.log
+*.sqlite
+*.sqlite3
+*.db
+
+# ============================================
+# Test and Coverage
+# ============================================
+.coverage
+coverage/
+htmlcov/
+.nyc_output/
+*.lcov
+
+# ============================================
+# Documentation Build
+# ============================================
+docs/_build/
+site/
+
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ============================================
+# Package Files
+# ============================================
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# ============================================
+# Secrets and Credentials
+# ============================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.json
+credentials.json
+
+# ============================================
+# Claude / AI Tools
+# ============================================
+.claude/
+.claude
+
+# ============================================
+# Windows
+# ============================================
+nul
+
+# ============================================
+# Local tooling (published in separate repos)
+# ============================================
+tools/

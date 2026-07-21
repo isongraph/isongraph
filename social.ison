@@ -1,0 +1,41 @@
+nodes.person
+id	name	age	role
+alice	Alice	30	Engineer
+bob	Bob	25	Designer
+carol	Carol	35	Manager
+dave	Dave	28	Developer
+
+nodes.company
+id	name	industry
+techcorp	TechCorp	Technology
+startupx	StartupX	AI
+
+nodes.project
+id	name	status
+alpha	Project Alpha	active
+beta	Project Beta	planning
+
+edges.KNOWS
+source	target	since
+:person:alice	:person:bob	2020
+:person:bob	:person:carol	2021
+:person:carol	:person:dave	2019
+:person:alice	:person:carol	2018
+
+edges.WORKS_AT
+source	target	role
+:person:alice	:company:techcorp	Engineer
+:person:bob	:company:techcorp	Designer
+:person:carol	:company:techcorp	Manager
+:person:dave	:company:startupx	Developer
+
+edges.MANAGES
+source	target
+:person:carol	:person:alice
+:person:carol	:person:bob
+
+edges.WORKS_ON
+source	target	hours
+:person:alice	:project:alpha	20
+:person:bob	:project:alpha	15
+:person:dave	:project:beta	30

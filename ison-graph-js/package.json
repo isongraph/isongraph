@@ -1,0 +1,49 @@
+{
+  "name": "ison-graph-js",
+  "version": "1.0.0",
+  "description": "ISONGraph - Token-efficient property graph store with ISON persistence for JavaScript",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [
+    "ison",
+    "graph",
+    "property-graph",
+    "graph-database",
+    "multi-hop",
+    "traversal",
+    "path-finding",
+    "llm",
+    "ai",
+    "token-efficient"
+  ],
+  "author": "Mahesh Vaikri",
+  "license": "MIT",
+  "dependencies": {
+    "ison-parser": "^1.0.1"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isongraph/isongraph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isongraph/isongraph/issues"
+  },
+  "homepage": "https://www.ison.dev"
+}

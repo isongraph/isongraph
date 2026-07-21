@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ison-graph
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: pytest tests -q
+
+  node:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [ison-graph-js, ison-graph-ts]
+    defaults:
+      run:
+        working-directory: ${{ matrix.package }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npm test
+      - if: matrix.package == 'ison-graph-ts'
+        run: npm run build
+
+  rust:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ison-graph-rs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --features serde
+      - run: cargo clippy --all-targets --features serde
+
+  cpp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ison-graph-cpp
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run tests
+        run: |
+          for t in test_ison_graph test_isonql test_isongraphantic; do
+            g++ -std=c++17 -Wall -I include "tests/$t.cpp" -o "$t"
+            "./$t"
+          done

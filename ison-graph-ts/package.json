@@ -1,0 +1,61 @@
+{
+  "name": "ison-graph-ts",
+  "version": "1.0.0",
+  "description": "ISONGraph - Token-efficient property graph store with ISON persistence for TypeScript",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ison",
+    "graph",
+    "property-graph",
+    "graph-database",
+    "multi-hop",
+    "traversal",
+    "path-finding",
+    "llm",
+    "ai",
+    "token-efficient"
+  ],
+  "author": "Mahesh Vaikri",
+  "license": "MIT",
+  "dependencies": {
+    "ison-ts": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isongraph/isongraph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isongraph/isongraph/issues"
+  },
+  "homepage": "https://www.ison.dev"
+}

@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ison-graph"
+version = "1.0.0"
+description = "ISONGraph - A token-efficient graph store format built on ISON"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Mahesh Vaikri"}
+]
+maintainers = [
+    {name = "Mahesh Vaikri"}
+]
+keywords = [
+    "ison",
+    "graph",
+    "graph-database",
+    "graph-store",
+    "knowledge-graph",
+    "llm",
+    "ai",
+    "token-efficient",
+    "property-graph",
+    "traversal",
+    "multi-hop"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Database :: Database Engines/Servers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "ison-py>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0",
+    "pytest-cov>=6.0",
+    "black>=25.0",
+    "isort>=5.0",
+    "mypy>=1.19",
+]
+
+[project.urls]
+Homepage = "https://www.ison.dev"
+Documentation = "https://www.ison.dev"
+Repository = "https://github.com/isongraph/isongraph"
+Issues = "https://github.com/isongraph/isongraph/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ison_graph = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

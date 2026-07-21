@@ -1,0 +1,13 @@
+# Normalize line endings across platforms
+* text=auto
+
+# Always LF for cross-platform tooling
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary

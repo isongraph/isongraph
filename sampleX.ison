@@ -1,0 +1,38 @@
+object.customer
+id name
+44512 "Alex Chen"
+
+table.items
+type sku name quantity stock_locations
+apparel      TS-BLU-M       "Developer T-Shirt"      2        null
+digital_good EBOOK-JS-GUIDE "JavaScript Mastery PDF" 1        []
+
+table.transaction_log
+col1 col2 col3
+2023-10-25T10:00:00Z ORDER_CREATED     SYSTEM
+2023-10-25T10:05:00Z PAYMENT_PROCESSED STRIPE
+
+table.customer_contact_emails
+customer_contact_id value
+:44512              alex.work@example.com
+:44512              alex.personal@example.com
+
+table.customer_contact_phones
+customer_contact_id type number
+:44512              mobile +1-555-0102
+:44512              home   +1-555-0199
+
+table.items_details_care_instructions
+items_details_id value
+:1               "Do not bleach"
+:1               "Cold wash only"
+
+table.items_details
+items_id size material file_size download_link drm_free
+:1       M    Cotton   null      null                         null
+:2       null null     15MB      https://api.store.com/dl/123 true
+
+table.items_stock_locations
+items_id warehouse_id bin
+:1       NY-01        A-12
+:1       CA-05        Z-09

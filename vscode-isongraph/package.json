@@ -1,0 +1,178 @@
+{
+  "name": "isongraph",
+  "displayName": "ISONGraph",
+  "description": "Visual graph editor and explorer for ISONGraph files with interactive visualization",
+  "version": "1.0.0",
+  "publisher": "isongraph",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "graph",
+    "isongraph",
+    "ison",
+    "knowledge graph",
+    "visualization",
+    "llm",
+    "property graph"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isongraph/isongraph.git",
+    "directory": "vscode-isongraph"
+  },
+  "license": "MIT",
+  "activationEvents": [
+    "onLanguage:ison",
+    "onLanguage:isonl",
+    "onCommand:isongraph.openVisualizer"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "isongraph.openVisualizer",
+        "title": "ISONGraph: Open Graph Visualizer",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "isongraph.addNode",
+        "title": "ISONGraph: Add Node"
+      },
+      {
+        "command": "isongraph.addEdge",
+        "title": "ISONGraph: Add Edge"
+      },
+      {
+        "command": "isongraph.exportPng",
+        "title": "ISONGraph: Export as PNG"
+      },
+      {
+        "command": "isongraph.exportSvg",
+        "title": "ISONGraph: Export as SVG"
+      },
+      {
+        "command": "isongraph.analyzeGraph",
+        "title": "ISONGraph: Analyze Graph"
+      },
+      {
+        "command": "isongraph.findPath",
+        "title": "ISONGraph: Find Path Between Nodes"
+      },
+      {
+        "command": "isongraph.showStats",
+        "title": "ISONGraph: Show Graph Statistics"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "isongraph.openVisualizer",
+          "when": "resourceLangId == ison || resourceLangId == isonl",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "isongraph.addNode",
+          "when": "resourceLangId == ison || resourceLangId == isonl",
+          "group": "isongraph@1"
+        },
+        {
+          "command": "isongraph.addEdge",
+          "when": "resourceLangId == ison || resourceLangId == isonl",
+          "group": "isongraph@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ISONGraph",
+      "properties": {
+        "isongraph.defaultLayout": {
+          "type": "string",
+          "default": "force",
+          "enum": ["force", "hierarchical", "circular", "grid"],
+          "description": "Default graph layout algorithm"
+        },
+        "isongraph.autoRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically refresh visualization on file save"
+        },
+        "isongraph.nodeColors": {
+          "type": "object",
+          "default": {
+            "person": "#a8d5ba",
+            "company": "#f4a460",
+            "document": "#87ceeb",
+            "concept": "#dda0dd"
+          },
+          "description": "Custom colors for node types"
+        },
+        "isongraph.showLabels": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show node labels in visualization"
+        },
+        "isongraph.labelProperty": {
+          "type": "string",
+          "default": "name",
+          "description": "Node property to use as label"
+        },
+        "isongraph.physics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable physics simulation for force layout"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "isongraph-explorer",
+          "title": "ISONGraph",
+          "icon": "$(graph)"
+        }
+      ]
+    },
+    "views": {
+      "isongraph-explorer": [
+        {
+          "id": "isongraph.graphOutline",
+          "name": "Graph Outline"
+        },
+        {
+          "id": "isongraph.nodeTypes",
+          "name": "Node Types"
+        },
+        {
+          "id": "isongraph.edgeTypes",
+          "name": "Edge Types"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "esbuild": "^0.17.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "d3": "^7.8.0"
+  }
+}
