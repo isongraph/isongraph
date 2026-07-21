@@ -1,11 +1,12 @@
 {
   "name": "ison-graph-js",
-  "version": "1.1.0",
-  "description": "ISONGraph - Token-efficient property graph store with ISON persistence for JavaScript",
+  "version": "1.2.0",
+  "description": "ISONGraph - Token-efficient property graph store with ISON persistence, ISONQL queries, schema validation, and deterministic graph visualization",
   "main": "src/index.js",
   "type": "module",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./viz": "./src/viz.js"
   },
   "files": [
     "src",

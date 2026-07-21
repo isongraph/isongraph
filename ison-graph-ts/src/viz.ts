@@ -14,7 +14,7 @@
  * (state * 1664525 + 1013904223 mod 2^32).
  */
 
-import { ISONGraph, Node, NodeRef } from './index';
+import type { ISONGraph, Node, NodeRef } from './index';
 
 export type Point = [number, number];
 /** Layout keyed by `${type} ${id}` - see layoutKey(). */

@@ -671,17 +671,19 @@ Deterministic layout and dependency-free rendering, mirroring the Python
 coordinates in both languages (covered by a parity test).
 
 ```typescript
-import { ISONGraph, viz } from 'ison-graph-ts';
+import { ISONGraph } from 'ison-graph-ts';
+import { computeLayout, renderSvg, renderHtml } from 'ison-graph-ts/viz';
+// (also available as a namespace: import { viz } from 'ison-graph-ts')
 
 const graph = new ISONGraph('social');
 // ... add nodes and edges ...
 
 // Stage 2: seeded force-directed layout -> Map<"type id", [x, y]>
-const layout = viz.computeLayout(graph, { width: 900, height: 600, seed: 42 });
+const layout = computeLayout(graph, { width: 900, height: 600, seed: 42 });
 
 // Stage 3: render the same coordinates
-const svg = viz.renderSvg(graph, { layout, title: 'My graph' });  // standalone image
-const html = viz.renderHtml(graph, { layout });                    // tooltips, pan/zoom, dark mode
+const svg = renderSvg(graph, { layout, title: 'My graph' });  // standalone image
+const html = renderHtml(graph, { layout });                    // tooltips, pan/zoom, dark mode
 ```
 
 Nodes are colored by type (colorblind-safe palette, 8 slots assigned in
