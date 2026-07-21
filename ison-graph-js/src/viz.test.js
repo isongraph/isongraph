@@ -174,3 +174,67 @@ describe('renderHtml', () => {
     expect(html).toContain(coord);
   });
 });
+
+describe('collision pass (radii)', () => {
+  function hubGraph() {
+    const g = new ISONGraph('collide');
+    g.addNode('hub', 'a', {});
+    g.addNode('hub', 'b', {});
+    for (let i = 1; i <= 4; i++) {
+      g.addNode('leaf', i, {});
+      g.addEdge('LINK', ['hub', 'a'], ['leaf', i]);
+      g.addEdge('LINK', ['hub', 'b'], ['leaf', i]);
+    }
+    return g;
+  }
+
+  it('enforces (rA + rB) * spacing between all pairs', () => {
+    const g = hubGraph();
+    const radii = {};
+    for (const node of g.nodes()) radii[layoutKey(node.ref)] = 40;
+    const layout = computeLayout(g, { radii, spacing: 2.6 });
+    const entries = Array.from(layout.entries());
+    for (let i = 0; i < entries.length; i++) {
+      for (let j = i + 1; j < entries.length; j++) {
+        const [ka, [ax, ay]] = entries[i];
+        const [kb, [bx, by]] = entries[j];
+        const d = Math.hypot(ax - bx, ay - by);
+        expect(d).toBeGreaterThanOrEqual((radii[ka] + radii[kb]) * 2.6 - 1e-6);
+      }
+    }
+  });
+
+  it('leaves output unchanged without radii', () => {
+    const g = hubGraph();
+    expect(computeLayout(g)).toEqual(computeLayout(g, { radii: undefined }));
+  });
+
+  it('matches the Python collision output bit-for-bit', () => {
+    const g = new ISONGraph('parity');
+    g.addNode('person', 'alice', { name: 'Alice', age: 30 });
+    g.addNode('person', 'bob', { name: 'Bob', age: 25 });
+    g.addNode('person', 'carol', { name: 'Carol', age: 35 });
+    g.addNode('company', 'acme', { name: 'Acme' });
+    g.addNode('project', 'p1', { name: 'Alpha' });
+    g.addEdge('KNOWS', ['person', 'alice'], ['person', 'bob']);
+    g.addEdge('KNOWS', ['person', 'bob'], ['person', 'carol']);
+    g.addEdge('WORKS_AT', ['person', 'alice'], ['company', 'acme']);
+    g.addEdge('WORKS_ON', ['person', 'carol'], ['project', 'p1']);
+    const radii = {};
+    for (const node of g.nodes()) radii[layoutKey(node.ref)] = 48;
+    const layout = computeLayout(g, { radii, spacing: 2.6 });
+    // Exact output of Python compute_layout(radii={...48}, spacing=2.6).
+    const expected = {
+      'company acme': [60, 60],
+      'person alice': [309.6, 60],
+      'person bob': [377.3280362355162, 354.58580004430877],
+      'person carol': [590.4000000000001, 540],
+      'project p1': [840, 540],
+    };
+    for (const [key, [px, py]] of Object.entries(expected)) {
+      const p = layout.get(key);
+      expect(p[0]).toBe(px);
+      expect(p[1]).toBe(py);
+    }
+  });
+});

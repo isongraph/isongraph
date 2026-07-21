@@ -26,6 +26,15 @@ export interface LayoutOptions {
   iterations?: number;
   seed?: number;
   margin?: number;
+  /**
+   * Visual radius per node, keyed by layoutKey(ref) (`"type id"`). When
+   * given, a deterministic collision pass separates every pair to at least
+   * `(rA + rB) * spacing`. Omitting it leaves output byte-identical to the
+   * plain layout.
+   */
+  radii?: Map<string, number> | Record<string, number>;
+  /** Spacing factor for the collision pass (default 1). */
+  spacing?: number;
 }
 
 export interface RenderOptions extends LayoutOptions {
@@ -184,6 +193,52 @@ export function computeLayout(graph: ISONGraph, options: LayoutOptions = {}): La
     }
     temp = Math.max(0.01, temp - cool);
   }
+
+  // Deterministic collision pass: separate every pair to at least
+  // (rA + rB) * spacing. Sorted pair order keeps this reproducible across
+  // processes and language ports (mirrors the Python implementation).
+  if (options.radii) {
+    const spacing = options.spacing ?? 1;
+    const radiiIn = options.radii;
+    const getRad = (key: string): number => {
+      const v = radiiIn instanceof Map ? radiiIn.get(key) : radiiIn[key];
+      return typeof v === 'number' ? v : 0;
+    };
+    const rad = new Map<string, number>();
+    for (const key of keys) rad.set(key, getRad(key));
+    for (let pass = 0; pass < 50; pass++) {
+      let moved = false;
+      for (let i = 0; i < n; i++) {
+        const ka = keys[i];
+        for (let j = i + 1; j < n; j++) {
+          const kb = keys[j];
+          const minD = (rad.get(ka)! + rad.get(kb)!) * spacing;
+          if (minD <= 0) continue;
+          const pa = pos.get(ka)!;
+          const pb = pos.get(kb)!;
+          const dx = pb[0] - pa[0];
+          const dy = pb[1] - pa[1];
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist >= minD) continue;
+          let ux: number;
+          let uy: number;
+          if (dist < 1e-9) {
+            ux = 1; uy = 0;
+          } else {
+            ux = dx / dist; uy = dy / dist;
+          }
+          const push = (minD - dist) / 2;
+          pa[0] = Math.min(width - margin, Math.max(margin, pa[0] - ux * push));
+          pa[1] = Math.min(height - margin, Math.max(margin, pa[1] - uy * push));
+          pb[0] = Math.min(width - margin, Math.max(margin, pb[0] + ux * push));
+          pb[1] = Math.min(height - margin, Math.max(margin, pb[1] + uy * push));
+          moved = true;
+        }
+      }
+      if (!moved) break;
+    }
+  }
+
   return pos;
 }
 

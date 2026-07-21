@@ -928,6 +928,11 @@ and a client-rendered page stay pixel-identical. Nodes are colored by type
 degree, and labeled from the `name` property (or `label_property=` of your
 choice).
 
+Pass ``radii={ref: radius}`` (and optionally ``spacing=2.6``) to enforce
+minimum center distance ``(r_a + r_b) * spacing`` between every pair - useful
+when node size encodes data and large bubbles must not overlap. Without
+``radii`` the output is byte-identical to earlier releases.
+
 The same API ships in the npm packages (`import { viz } from 'ison-graph-ts'`
 or `'ison-graph-js'`) with bit-identical layout geometry, verified by
 cross-language parity tests.

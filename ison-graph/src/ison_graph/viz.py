@@ -78,6 +78,8 @@ def compute_layout(
     iterations: int = 170,
     seed: int = 42,
     margin: int = 60,
+    radii: Optional[Dict[NodeRef, float]] = None,
+    spacing: float = 1.0,
 ) -> Layout:
     """
     Compute a deterministic force-directed layout (Fruchterman-Reingold).
@@ -88,6 +90,11 @@ def compute_layout(
     processes and across language ports: the PRNG is a portable 32-bit LCG
     (state * 1664525 + 1013904223 mod 2^32) so any implementation that
     mirrors it reproduces the exact geometry.
+
+    When ``radii`` maps node refs to visual radii, a deterministic collision
+    pass runs after the simulation, pushing every pair apart until their
+    centers are at least ``(r_a + r_b) * spacing`` apart. Omitting ``radii``
+    leaves the output byte-identical to earlier releases.
 
     Returns a dict mapping every node ref ``(type, id)`` to an ``(x, y)``
     position inside the ``width`` x ``height`` canvas (minus ``margin``).
@@ -173,6 +180,38 @@ def compute_layout(
             pos[ref][1] = min(height - margin, max(margin, y))
 
         temp = max(0.01, temp - cool)
+
+    # Deterministic collision pass: separate every pair to at least
+    # (r_a + r_b) * spacing. Sorted pair order keeps this reproducible
+    # across processes and language ports.
+    if radii:
+        rad = {ref: float(radii.get(ref, 0.0)) for ref in refs}
+        for _ in range(50):
+            moved = False
+            for i in range(n):
+                ra = refs[i]
+                for j in range(i + 1, n):
+                    rb = refs[j]
+                    min_d = (rad[ra] + rad[rb]) * spacing
+                    if min_d <= 0.0:
+                        continue
+                    dx = pos[rb][0] - pos[ra][0]
+                    dy = pos[rb][1] - pos[ra][1]
+                    dist = math.sqrt(dx * dx + dy * dy)
+                    if dist >= min_d:
+                        continue
+                    if dist < 1e-9:
+                        ux, uy = 1.0, 0.0
+                    else:
+                        ux, uy = dx / dist, dy / dist
+                    push = (min_d - dist) / 2.0
+                    pos[ra][0] = min(width - margin, max(margin, pos[ra][0] - ux * push))
+                    pos[ra][1] = min(height - margin, max(margin, pos[ra][1] - uy * push))
+                    pos[rb][0] = min(width - margin, max(margin, pos[rb][0] + ux * push))
+                    pos[rb][1] = min(height - margin, max(margin, pos[rb][1] + uy * push))
+                    moved = True
+            if not moved:
+                break
 
     return {ref: (p[0], p[1]) for ref, p in pos.items()}
 

@@ -168,3 +168,47 @@ class TestSaveAndCLI:
         out = tmp_path / 'g.svg'
         assert main([str(src), '-o', str(out), '--seed', '5']) == 0
         ET.fromstring(out.read_text(encoding='utf-8'))
+
+
+class TestCollisionPass:
+    """Radius-aware spacing: (r_a + r_b) * spacing enforced deterministically."""
+
+    def _graph(self):
+        g = ISONGraph('collide')
+        g.add_node('hub', 'a')
+        g.add_node('hub', 'b')
+        for i in range(1, 5):
+            g.add_node('leaf', i)
+            g.add_edge('LINK', ('hub', 'a'), ('leaf', i))
+            g.add_edge('LINK', ('hub', 'b'), ('leaf', i))
+        return g
+
+    def test_radii_enforce_minimum_spacing(self):
+        import math, itertools
+        g = self._graph()
+        radii = {n.ref: 40.0 for n in g.nodes()}
+        layout = compute_layout(g, radii=radii, spacing=2.6)
+        for a, b in itertools.combinations(layout, 2):
+            d = math.dist(layout[a], layout[b])
+            assert d >= (radii[a] + radii[b]) * 2.6 - 1e-6
+
+    def test_no_radii_output_unchanged(self):
+        g = self._graph()
+        assert compute_layout(g) == compute_layout(g, radii=None)
+
+    def test_collision_is_deterministic(self):
+        g = self._graph()
+        radii = {n.ref: 40.0 for n in g.nodes()}
+        a = compute_layout(g, radii=radii, spacing=2.6)
+        b = compute_layout(g, radii=radii, spacing=2.6)
+        assert a == b
+
+    def test_coincident_nodes_get_separated(self):
+        import math
+        g = ISONGraph('pair')
+        g.add_node('n', 1)
+        g.add_node('n', 2)
+        radii = {('n', 1): 500.0, ('n', 2): 500.0}
+        layout = compute_layout(g, radii=radii, spacing=1.0)
+        d = math.dist(layout[('n', 1)], layout[('n', 2)])
+        assert d > 0

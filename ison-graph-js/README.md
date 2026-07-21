@@ -898,6 +898,11 @@ const svg = renderSvg(graph, { layout, title: 'My graph' });  // standalone imag
 const html = renderHtml(graph, { layout });                    // tooltips, pan/zoom, dark mode
 ```
 
+Pass `radii` (keyed by `layoutKey(ref)`, i.e. `"type id"`) plus an optional
+`spacing` factor to enforce minimum center distance `(rA + rB) * spacing`
+between every pair - useful when node size encodes data and large bubbles
+must not overlap. Without `radii` the output is byte-identical.
+
 Nodes are colored by type (colorblind-safe palette, 8 slots assigned in
 sorted order), sized by degree, and labeled from the `name` property (or
 `labelProperty` of your choice).
