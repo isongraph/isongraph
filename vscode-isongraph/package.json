@@ -95,7 +95,12 @@
         "isongraph.defaultLayout": {
           "type": "string",
           "default": "force",
-          "enum": ["force", "hierarchical", "circular", "grid"],
+          "enum": [
+            "force",
+            "hierarchical",
+            "circular",
+            "grid"
+          ],
           "description": "Default graph layout algorithm"
         },
         "isongraph.autoRefresh": {
@@ -168,7 +173,7 @@
     "@types/vscode": "^1.74.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "esbuild": "^0.17.0",
+    "esbuild": "^0.28.1",
     "eslint": "^8.0.0",
     "typescript": "^5.0.0"
   },
