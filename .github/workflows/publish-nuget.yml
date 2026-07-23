@@ -1,0 +1,29 @@
+name: Publish NuGet package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for NuGet Trusted Publishing (OIDC)
+      contents: read
+    defaults:
+      run:
+        working-directory: ison-graph-cs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - run: dotnet build -warnaserror
+      - run: dotnet test --no-build
+      - run: dotnet pack src/IsonGraph -c Release -o out
+      - name: NuGet login (trusted publishing)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: maheshvaikri
+      - name: Push to NuGet
+        run: dotnet nuget push out/*.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
