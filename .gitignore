@@ -87,6 +87,7 @@ Makefile
 *.vcxproj.filters
 *.vcxproj.user
 *.sln
+!ison-graph-cs/IsonGraph.sln
 *.suo
 *.user
 *.userosscache
