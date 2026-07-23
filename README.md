@@ -98,7 +98,7 @@ ISONGraph has been comprehensively tested with two benchmark suites:
 - **Fluent Query API** - Chainable traversal interface
 - **Pattern Queries** - Cypher-like query patterns
 - **ISONQL** - Declarative SQL-like query language for graphs
-- **Visualization** - Deterministic force layout + SVG/HTML rendering (Python, JavaScript, TypeScript - bit-identical geometry across languages)
+- **Visualization** - Deterministic force layout + SVG/HTML rendering (Python, JavaScript, TypeScript, C# - bit-identical geometry across languages)
 
 ### Schema Validation (ISONGraphantic)
 - **Type Validators** - String, Int, Float, Bool, Ref
@@ -119,6 +119,7 @@ ISONGraph has been comprehensively tested with two benchmark suites:
 - **TypeScript** - Full feature parity
 - **Rust** - High-performance implementation
 - **C++** - Header-only library
+- **C#** - .NET 8 library (`IsonGraph`), zero dependencies
 
 ---
 
@@ -150,6 +151,13 @@ ison-graph = "1.0.0"
 ```cmake
 find_package(ison_graph REQUIRED)
 target_link_libraries(your_target ison::ison_graph)
+```
+
+### C# (.NET 8)
+
+```bash
+# NuGet package coming soon - until then, reference from source:
+dotnet add reference path/to/isongraph/ison-graph-cs/src/IsonGraph/IsonGraph.csproj
 ```
 
 ---
@@ -328,6 +336,7 @@ isongraph/
 ├── ison-graph-ts/           # TypeScript implementation
 ├── ison-graph-rs/           # Rust implementation (crate name: ison-graph)
 ├── ison-graph-cpp/          # C++ implementation (header-only)
+├── ison-graph-cs/           # C# implementation (.NET 8, package: IsonGraph)
 ├── vscode-isongraph/        # VS Code extension: graph visualizer (d3-based)
 ├── vscode-isongraphviz/     # VS Code extension: deterministic viz (zero-dependency)
 ├── benchmark/               # Performance benchmarks

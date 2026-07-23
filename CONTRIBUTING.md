@@ -18,6 +18,7 @@ cd isongraph
 | `ison-graph-ts/` (TypeScript) | `npm install` then `npm run build && npm test` |
 | `ison-graph-rs/` (Rust, crate `ison-graph`) | `cargo build` then `cargo test` |
 | `ison-graph-cpp/` (C++, header-only) | `cmake -B build && cmake --build build` then `ctest --test-dir build` |
+| `ison-graph-cs/` (C#, .NET 8) | `dotnet build` then `dotnet test` |
 | `vscode-isongraph/` (VS Code extension) | `npm install` then `npm run compile` |
 | `vscode-isongraphviz/` (VS Code extension) | `npm install` then `npm run compile` |
 

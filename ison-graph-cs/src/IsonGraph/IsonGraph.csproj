@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>IsonGraph</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="IsonGraph.Tests" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>IsonGraph</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Mahesh Vaikri</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/isongraph/isongraph</RepositoryUrl>
+    <PackageProjectUrl>https://graph.ison.dev</PackageProjectUrl>
+    <Description>ISONGraph - Token-efficient property graph store with ISON persistence, ISONQL queries, schema validation, and deterministic graph visualization</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

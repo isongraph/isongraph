@@ -1,0 +1,14 @@
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Test results
+TestResults/
+
+# NuGet packages produced by `dotnet pack`
+*.nupkg
+*.snupkg
